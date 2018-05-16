@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "com.unity.incrementalcompiler": "0.0.41",
+    "com.unity.entities": "0.0.12-preview.1",
+    "com.unity.package-manager-ui": "1.9.3",
+    "com.unity.ads": "2.0.8",
+    "com.unity.shadergraph": "1.1.8-preview",
+    "com.unity.render-pipelines.core": "1.1.8-preview",
+    "com.unity.render-pipelines.lightweight": "1.1.8-preview"
+  },
+  "registry": "https://staging-packages.unity.com",
+  "testables": [
+    "com.unity.collections",
+    "com.unity.entities",
+    "com.unity.jobs"
+  ]
+}
