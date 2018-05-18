@@ -6,6 +6,6 @@ public class Settingscs : MonoBehaviour{
     public int nbOfCubes = 20;
     public Text text;
     void Update(){
-        text.text = (1/Time.deltaTime).ToString();
+        text.text = (Time.deltaTime).ToString();
     }
 }
