@@ -92,7 +92,8 @@ public class CubeSpawnSystem : ComponentSystem {
         }
         UnityEngine.GameObject.Destroy(obj);
         
-        World.Active.GetOrCreateManager<CubeSpawnSystem>().Enabled = false;
+        // World.Active.GetOrCreateManager<CubeSpawnSystem>().Enabled = false;
+        this.Enabled = false;
         // Debug.Log(_Cubesp.Length);
         // PostUpdateCommands.RemoveComponent<Radius>(_Cubesp.Entities[0]);
         // PostUpdateCommands.DestroyEntity(_Cubesp.Entities[0]);
