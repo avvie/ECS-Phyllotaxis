@@ -17,7 +17,9 @@ public sealed class Bootstrap{
 		EntityManager entityManager = World.Active.GetOrCreateManager<EntityManager>();
 
 		CubeSpawner = entityManager.CreateArchetype(typeof(Position), typeof(Radius));
-
+		World.Active.GetOrCreateManager<EntityManager>().CreateEntity(CubeSpawner);
+		Cube = World.Active.GetOrCreateManager<EntityManager>().CreateArchetype(typeof(Position), typeof(CubeComp),
+                typeof(MeshInstanceRenderer), typeof(TransformMatrix), typeof(Rotation), typeof(RotationSpeed));
 		// Cube = entityManager.CreateArchetype(typeof(Position), typeof(Heading));
 		// entityManager.CreateEntity(CubeSpawner);
 	}
@@ -26,6 +28,6 @@ public sealed class Bootstrap{
 	public static void InitializeWithScene(){
 		Debug.Log("InitializeWithScene");
 		Settings = GameObject.Find("Settings").GetComponent<Settingscs>();
-		World.Active.GetOrCreateManager<EntityManager>().CreateEntity(CubeSpawner);
+		
 	}
 }

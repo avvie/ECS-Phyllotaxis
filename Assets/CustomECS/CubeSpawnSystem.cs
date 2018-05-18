@@ -7,23 +7,25 @@ using Unity.Rendering;
 using UnityEngine;
 
 // public class CubeSpawnSystem : JobComponentSystem {
+    
 public class CubeSpawnSystem : ComponentSystem {
     public struct CubeSp{
         public int Length;
         [ReadOnly] public ComponentDataArray<Position> Position;
         [ReadOnly] public ComponentDataArray<Radius> RadiusComponent;
+         public EntityArray Entities;
     }
 
     // NativeArray<MeshInstanceRenderer> mira;
 
     [Inject] CubeSp _Cubesp;
-    public struct CubeData{
-        public int Length;
-        public ComponentDataArray<Position> Position;
-        public ComponentDataArray<CubeComp> cubeComp;
-    }
+    // public struct CubeData{
+    //     public int Length;
+    //     public ComponentDataArray<Position> Position;
+    //     public ComponentDataArray<CubeComp> cubeComp;
+    // }
 
-    [Inject] private CubeData m_CubeData;
+    // [Inject] private CubeData m_CubeData;
 
     public EntityArchetype Cube;
 
@@ -44,21 +46,26 @@ public class CubeSpawnSystem : ComponentSystem {
     //     }
     // }
 
+    
+
     // [Inject] EndFrameBarrier _endFrameBarrier;
     // var MIR;
 
     public GameObject obj;
+    int localCount = 0;
 
     protected override void OnUpdate(){
-        if(m_CubeData.Length >= 20)
+        // Debug.Log(_Cubesp.Length);
+        if(localCount >= Bootstrap.Settings.nbOfCubes - 1){
+            // Debug.Log("ti fash ");
             return;
+        }
         
         if(obj == null){
             obj = GameObject.Find("Cube");
         }
 
-        Cube = World.Active.GetOrCreateManager<EntityManager>().CreateArchetype(typeof(Position), typeof(CubeComp),
-                typeof(MeshInstanceRenderer), typeof(TransformMatrix), typeof(Rotation), typeof(RotationSpeed));
+        Cube = Bootstrap.Cube;
                 // typeof(TransformParent));
 
 
@@ -80,9 +87,18 @@ public class CubeSpawnSystem : ComponentSystem {
                     radius * math.sin(0)*math.sin(i*segment + Time.deltaTime),
                     radius * math.cos(i*segment + Time.deltaTime)) });
                 PostUpdateCommands.SetComponent(new RotationSpeed { Value = 2});
+                localCount++;
                 // PostUpdateCommands.SetComponent(new TransformParent { Value = new Position { Value = new float3(0,0,0)} });
         }
         UnityEngine.GameObject.Destroy(obj);
+        
+        
+        // Debug.Log(_Cubesp.Length);
+        // PostUpdateCommands.RemoveComponent<Radius>(_Cubesp.Entities[0]);
+        // PostUpdateCommands.DestroyEntity(_Cubesp.Entities[0]);
+
+            
+        
     }
 
     // protected override JobHandle OnUpdate(JobHandle inputDeps) {
