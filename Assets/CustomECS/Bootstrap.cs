@@ -15,14 +15,13 @@ public sealed class Bootstrap{
 	public static void Initialize(){
 		Debug.Log("init");
 		EntityManager entityManager = World.Active.GetOrCreateManager<EntityManager>();
-
-		CubeSpawner = entityManager.CreateArchetype(typeof(Position), typeof(Radius));
-		World.Active.GetOrCreateManager<EntityManager>().CreateEntity(CubeSpawner);
-		Cube = World.Active.GetOrCreateManager<EntityManager>().CreateArchetype(typeof(Position), typeof(CubeComp),
+        Cube = World.Active.GetOrCreateManager<EntityManager>().CreateArchetype(typeof(Position), typeof(CubeComp),
                 typeof(MeshInstanceRenderer), typeof(TransformMatrix), typeof(Rotation), typeof(RotationSpeed));
-		// Cube = entityManager.CreateArchetype(typeof(Position), typeof(Heading));
-		// entityManager.CreateEntity(CubeSpawner);
-	}
+        CubeSpawner = entityManager.CreateArchetype(typeof(Position), typeof(Radius));
+        World.Active.GetOrCreateManager<EntityManager>().CreateEntity(CubeSpawner);
+        // Cube = entityManager.CreateArchetype(typeof(Position), typeof(Heading));
+        // entityManager.CreateEntity(CubeSpawner);
+    }
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 	public static void InitializeWithScene(){
