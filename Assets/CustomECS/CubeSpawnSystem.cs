@@ -62,11 +62,12 @@ public class CubeSpawnSystem : ComponentSystem {
                 radius = 1.3f * math.sqrt(i);
                 PostUpdateCommands.CreateEntity(Cube);
                 PostUpdateCommands.SetSharedComponent(mir);
-                PostUpdateCommands.SetComponent(new Position { Value = new float3(0,0,0) + new float3(
+                PostUpdateCommands.SetComponent(new LocalPosition { Value = new float3(0,0,0) + new float3(
                     radius * math.sin(i*segment + Time.deltaTime)*math.cos(0),
                     radius * math.sin(0)*math.sin(i*segment + Time.deltaTime),
                     radius * math.cos(i*segment + Time.deltaTime)) });
                 PostUpdateCommands.SetComponent(new RotationSpeed { Value = 2});
+                PostUpdateCommands.SetComponent(new TransformParent { Value = Bootstrap.transform});
                 // PostUpdateCommands.SetComponent(new TransformParent { Value = new Position { Value = new float3(0,0,0)} });
         }
         this.Enabled = false;
