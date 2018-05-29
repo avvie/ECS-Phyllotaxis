@@ -22,7 +22,7 @@ public sealed class Bootstrap{
                 typeof(MeshInstanceRenderer), typeof(TransformMatrix), typeof(LocalRotation), typeof(RotationSpeed), typeof(TransformParent));
 
 		rotationFocus = World.Active.GetOrCreateManager<EntityManager>().CreateArchetype(typeof(Position), typeof(Rotation)
-				, typeof(RotationSpeed), typeof(TransformMatrix), typeof(RotationFocus));
+				, typeof(RotationSpeed), typeof(TransformMatrix), typeof(RotationFocus), typeof(VoidSystem<TransformSystem>));
 
         CubeSpawner = entityManager.CreateArchetype(typeof(Position), typeof(Radius));
 		
@@ -32,6 +32,7 @@ public sealed class Bootstrap{
 		entityManager.CreateEntity(InputLayer);
 
 		transform = entityManager.CreateEntity(rotationFocus);
+        
 		entityManager.SetComponentData<Position>(transform, new Position {Value = new float3(0, 0, 0)});
 		entityManager.SetComponentData<RotationSpeed>(transform, new RotationSpeed { Value = 5});
         // Cube = entityManager.CreateArchetype(typeof(Position), typeof(Heading));
