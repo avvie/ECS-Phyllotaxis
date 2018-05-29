@@ -13,8 +13,8 @@ public class RotationSystemParents : JobComponentSystem {
 	[ComputeJobOptimization]
     struct RotationSpeedParent : IJobProcessComponentData<TransformMatrix, Rotation, RotationFocus> {
         public float dt;
-
-        public void Execute(ref TransformMatrix tranformMatrix, [ReadOnly]ref Rotation rotation, [ReadOnly]ref RotationFocus tp) {
+        // public float4x4 pM;
+        public void Execute(ref TransformMatrix tranformMatrix, ref Rotation rotation, [ReadOnly]ref RotationFocus tp) {
             quaternion q = math.mul(math.normalize(rotation.Value), math.axisAngle(math.up(), 2 * dt));
             float4x4 m = tranformMatrix.Value;
 
@@ -35,7 +35,8 @@ public class RotationSystemParents : JobComponentSystem {
             m.m0.y = xy - wz; m.m1.y = 1.0f - (xx + zz); m.m2.y = yz + wx; m.m3.y = 0.0F;
             m.m0.z = xz + wy; m.m1.z = yz - wx; m.m2.z = 1.0f - (xx + yy); m.m3.z = 0.0F;
             m.m0.w = 0.0F; m.m1.w = 0.0F; m.m2.w = 0.0F; m.m3.w = 1.0F;
-
+            
+            rotation.Value = q;
             tranformMatrix.Value = m;
             // rotation.Value = math.mul(math.normalize(rotation.Value), math.axisAngle(math.up(), speed.Value * dt ));
         }
