@@ -24,7 +24,7 @@ public class SineSystemOnAxis : JobComponentSystem {
 			// float pos = new float3(position.Value.x, position.Value.y, position.Value.z);
 			point = position.Value;
 			float distanceFromCenter = math.distance(position.Value, originPoint);
-			point.y =  point.y +( math.sin(distanceFromCenter + temp)) * 25;
+			point.y =  point.y +( math.sin(distanceFromCenter + temp )) * 25;
 			
 			position.Value = math.lerp(position.Value, point, dt * Const);
 		}

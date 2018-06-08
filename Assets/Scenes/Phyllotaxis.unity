@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 100
-  nbOfCubes: 200000
+  nbOfCubes: 50000
   lerpFact: 1
   cube: {fileID: 0}
   mat: {fileID: 2100000, guid: acc0d10c168ed104b9d037ae4533f7dd, type: 2}
