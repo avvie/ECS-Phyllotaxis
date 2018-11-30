@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/Phyllotaxis.unity
-    guid: c01e0d1583b1209439c8bc711b3af7eb
   m_configObjects: {}
