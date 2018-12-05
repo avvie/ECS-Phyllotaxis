@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -27,15 +28,24 @@ public class CubeSpawnSystem : ComponentSystem
             var cubeEntity = EntityManager.CreateEntity(Cube);
             EntityManager.SetComponentData(cubeEntity, new Rotation {Value = quaternion.identity});
             EntityManager.SetSharedComponentData(cubeEntity, mir);
-            EntityManager.SetComponentData(cubeEntity, new Position
-            {
-                Value = new float3(0, 0, 0) + new float3(
+            float3 pos = new float3(0, 0, 0) + new float3(
                             radius * math.sin(i * segment + Time.deltaTime) * math.cos(0),
                             radius * math.sin(0) * math.sin(i * segment + Time.deltaTime),
-                            radius * math.cos(i * segment + Time.deltaTime))
+                            radius * math.cos(i * segment + Time.deltaTime));
+            EntityManager.SetComponentData(cubeEntity, new Position
+            {
+                Value = pos
             });
             EntityManager.SetComponentData(cubeEntity, new RotationSpeed {Value = 2});
-            
+            //EntityManager.SetComponentData(cubeEntity, new WorldMeshRenderBounds {
+            //    Center = pos, 
+            //    Radius = 0.5f
+            //});
+            EntityManager.SetComponentData(cubeEntity, new MeshRenderBounds {
+                Center = pos,
+                Radius = 0.5f
+            });
+
             var attachEntity = EntityManager.CreateEntity(CubeAttach);
             EntityManager.SetComponentData(attachEntity, new Attach
             {

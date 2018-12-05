@@ -20,7 +20,7 @@ public sealed class Bootstrap
         var entityManager = World.Active.GetOrCreateManager<EntityManager>();
 
         Cube = entityManager.CreateArchetype(typeof(Position), typeof(CubeComp),
-            typeof(MeshInstanceRenderer), typeof(Rotation), typeof(RotationSpeed));
+            typeof(MeshInstanceRenderer), typeof(Rotation), typeof(RotationSpeed), typeof(WorldMeshRenderBounds), typeof(MeshRenderBounds));
         CubeAttach = entityManager.CreateArchetype(typeof(Attach));
         
         rotationFocus = World.Active.GetOrCreateManager<EntityManager>().CreateArchetype(typeof(Position),

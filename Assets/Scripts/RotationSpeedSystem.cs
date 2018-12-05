@@ -2,10 +2,11 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
-[UpdateAfter(typeof(RotationSystemParents))]
+
 public class RotationSpeedSystem : ComponentSystem
 {
     protected override void OnUpdate()
@@ -15,6 +16,9 @@ public class RotationSpeedSystem : ComponentSystem
             dt = Time.deltaTime
         };
         job.Schedule(this).Complete();
+        //var job2 = new BoundUpdateJob { };
+        //job2.Schedule(this, TransformSystem);
+
     }
 
     [BurstCompile]
@@ -27,4 +31,6 @@ public class RotationSpeedSystem : ComponentSystem
             rotation.Value = math.mul(math.normalize(rotation.Value), quaternion.AxisAngle(math.up(), speed.Value * dt));
         }
     }
+
+    
 }
