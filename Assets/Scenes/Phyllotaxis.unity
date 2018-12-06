@@ -235,7 +235,7 @@ MonoBehaviour:
   cube: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   lerpFact: 1
   mat: {fileID: 2100000, guid: acc0d10c168ed104b9d037ae4533f7dd, type: 2}
-  nbOfCubes: 1000
+  nbOfCubes: 100000
   radius: 100
 --- !u!4 &1126918497
 Transform:
