@@ -1,5 +1,7 @@
 # ECS-Phyllotaxis
-Learning ECS - 100k Cubes in Phyllotaxis pattern
+Learning ECS - 10k Cubes in Phyllotaxis pattern
+
+Culling added to this project for better performance
 
 All of them rotating. testing to see an entity spawner and a system
 ![Screensot](https://i.imgur.com/uehHsJs.png)

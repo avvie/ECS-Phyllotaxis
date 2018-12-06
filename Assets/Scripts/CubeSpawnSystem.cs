@@ -37,14 +37,14 @@ public class CubeSpawnSystem : ComponentSystem
                 Value = pos
             });
             EntityManager.SetComponentData(cubeEntity, new RotationSpeed {Value = 2});
-            //EntityManager.SetComponentData(cubeEntity, new WorldMeshRenderBounds {
-            //    Center = pos, 
-            //    Radius = 0.5f
-            //});
-            EntityManager.SetComponentData(cubeEntity, new MeshRenderBounds {
-                Center = pos,
+            EntityManager.SetComponentData(cubeEntity, new WorldMeshRenderBounds {
+                Center = pos, 
                 Radius = 0.5f
             });
+            //EntityManager.SetComponentData(cubeEntity, new MeshRenderBounds {
+            //    Center = pos,
+            //    Radius = 0.5f
+            //});
 
             var attachEntity = EntityManager.CreateEntity(CubeAttach);
             EntityManager.SetComponentData(attachEntity, new Attach

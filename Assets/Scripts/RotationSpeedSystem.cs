@@ -16,8 +16,8 @@ public class RotationSpeedSystem : ComponentSystem
             dt = Time.deltaTime
         };
         job.Schedule(this).Complete();
-        //var job2 = new BoundUpdateJob { };
-        //job2.Schedule(this, TransformSystem);
+        var job2 = new BoundUpdateJob { };
+        //job2.Schedule(this).Complete();
 
     }
 
@@ -29,6 +29,18 @@ public class RotationSpeedSystem : ComponentSystem
         public void Execute(ref Rotation rotation, [ReadOnly] ref RotationSpeed speed, [ReadOnly] ref Parent tp)
         {
             rotation.Value = math.mul(math.normalize(rotation.Value), quaternion.AxisAngle(math.up(), speed.Value * dt));
+        }
+    }
+
+    [BurstCompile]
+    private struct BoundUpdateJob : IJobProcessComponentData<Position, Rotation, MeshRenderBounds> {
+
+        public void Execute([ReadOnly] ref Position pos, [ReadOnly] ref Rotation rot, ref MeshRenderBounds mrb) {
+
+            mrb = new MeshRenderBounds {
+                Center = math.mul(rot.Value, pos.Value).xyz,
+                Radius = mrb.Radius
+            };
         }
     }
 
