@@ -41,10 +41,6 @@ public class CubeSpawnSystem : ComponentSystem
                 Center = pos, 
                 Radius = 0.5f
             });
-            //EntityManager.SetComponentData(cubeEntity, new MeshRenderBounds {
-            //    Center = pos,
-            //    Radius = 0.5f
-            //});
 
             var attachEntity = EntityManager.CreateEntity(CubeAttach);
             EntityManager.SetComponentData(attachEntity, new Attach
