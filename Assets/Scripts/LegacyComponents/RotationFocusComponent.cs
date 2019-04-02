@@ -7,6 +7,6 @@ public struct RotationFocus : IComponentData
 }
 
 [UnityEngine.DisallowMultipleComponent]
-public class RotationFocusComponent : ComponentDataWrapper<RotationFocus>
+public class RotationFocusComponent : ComponentDataProxy<RotationFocus>
 {
 }
