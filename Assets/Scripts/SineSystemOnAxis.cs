@@ -12,6 +12,7 @@ public class SineSystemOnAxis : JobComponentSystem
     private readonly float3 oriP = new float3(0, 0, 0);
     private int sign = -1;
     private float temp;
+    private int lerpFact = 1;
 
     protected override void OnCreateManager()
     {
@@ -29,14 +30,14 @@ public class SineSystemOnAxis : JobComponentSystem
             temp = temp,
             sign = sign,
             dt = Time.deltaTime,
-            Const = Bootstrap.Settings.lerpFact
+            Const = lerpFact
         };
         temp = temp + Time.deltaTime;
         return job.Schedule(this, inputDeps);
     }
 
     [BurstCompile]
-    private struct SineSystem : IJobProcessComponentData<Position, RotationSpeed>
+    private struct SineSystem : IJobProcessComponentData<Translation, RotationData>
     {
         [ReadOnly] public float3 originPoint;
         [ReadOnly] public float temp;
@@ -45,7 +46,7 @@ public class SineSystemOnAxis : JobComponentSystem
         [ReadOnly] public float Const;
         private float3 point;
 
-        public void Execute(ref Position position, [ReadOnly] ref RotationSpeed speed)
+        public void Execute(ref Translation position, [ReadOnly] ref RotationData speed)
         {
             point = position.Value;
             var distanceFromCenter = math.distance(position.Value, originPoint);

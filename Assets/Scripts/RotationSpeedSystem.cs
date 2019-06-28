@@ -1,33 +1,38 @@
-﻿using Unity.Burst;
+﻿using TMPro;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
 
-public class RotationSpeedSystem : ComponentSystem
+public class RotationSpeedSystem : JobComponentSystem
 {
-    protected override void OnUpdate()
-    {
-        var job = new RotationSpeedRotation
-        {
-            dt = Time.deltaTime
-        };
-        job.Schedule(this).Complete();
-
-    }
-
     [BurstCompile]
-    private struct RotationSpeedRotation : IJobProcessComponentData<Rotation, RotationSpeed, Parent>
+    private struct RotationSpeedRotation : IJobProcessComponentData<Rotation, RotationData>
     {
         public float dt;
 
-        public void Execute(ref Rotation rotation, [ReadOnly] ref RotationSpeed speed, [ReadOnly] ref Parent tp)
+        public void Execute(ref Rotation rotation, [ReadOnly] ref RotationData data)
         {
-            rotation.Value = math.mul(math.normalize(rotation.Value), quaternion.AxisAngle(math.up(), speed.Value * dt));
+            //if (data.Radius > 0)
+            //{
+                rotation.Value = math.mul(math.normalize(rotation.Value), quaternion.AxisAngle(math.up(), data.Value * dt));
+            //}
         }
     }
-    
+
+    protected override JobHandle OnUpdate(JobHandle inputDeps)
+    {
+        return new RotationSpeedRotation
+        {
+            dt = Time.deltaTime
+
+        }.Schedule(this, inputDeps);
+    }
 }
+
+

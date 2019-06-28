@@ -8,6 +8,6 @@ public struct Radius : IComponentData
 }
 
 [UnityEngine.DisallowMultipleComponent]
-public class RadiusComponent : ComponentDataWrapper<Radius>
+public class RadiusComponent : ComponentDataProxy<Radius>
 {
 }
